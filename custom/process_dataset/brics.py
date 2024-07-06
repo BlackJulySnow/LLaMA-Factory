@@ -4,7 +4,7 @@ from custom_brics import BRICSDecompose
 from rdkit import Chem
 df = pd.read_csv("custom/smiles/smiles.csv", low_memory=False)
 # 仅取前1000条数据进行测试
-df = df.head(1000).copy()
+# df = df.head(1000).copy()
 df['index'] = df.index
 process_size = 16
 df["bin"] = pd.qcut(df["index"], q=process_size, labels=False)
@@ -21,7 +21,7 @@ def process_smiles(bin_df, process, return_dict):
             results.append(res)
         except Exception as e:
             print(f"error: {e}")
-            
+            results.append(res)
     print(f"success:{process}")
     return_dict[process] = results
 
