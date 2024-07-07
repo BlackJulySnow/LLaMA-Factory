@@ -10,7 +10,6 @@ def split_smiles():
     # 将 JSON 数据转换为 DataFrame
     df = pd.DataFrame(data)
     # print(len(df))
-    # # 按 8:2 的比例分割数据
     train_df, test_df = train_test_split(df, test_size=0.005, random_state=42)
 
 
@@ -33,7 +32,6 @@ def split_compound():
     # 将 JSON 数据转换为 DataFrame
     df = pd.DataFrame(data)
     # print(len(df))
-    # # 按 8:2 的比例分割数据
     train_df, test_df = train_test_split(df, test_size=0.005, random_state=42)
 
 
