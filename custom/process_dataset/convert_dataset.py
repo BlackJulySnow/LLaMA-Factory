@@ -3,6 +3,10 @@ import ast
 import json
 import re
 from tqdm import tqdm
+import sys
+
+sys.path.append("custom")
+from utils import valid_smiles
 
 dir = "custom/smiles"
 
@@ -13,7 +17,7 @@ df = df.dropna(subset=["brics"])
 
 def remove_pattern(text):
     # 使用正则表达式匹配并去除 "[数字*]" 模式
-    result = re.sub(r"\[\d+\*\]", "", text)
+    result = re.sub(r"\[\d+\*\]", "C", text)
     return result.replace("'", '"')
 
 
@@ -42,6 +46,7 @@ def generate_compound():
     instruction = "Help me to synthesize molecules."
     data = []
     count = 0
+    valid = 0
     for index, row in tqdm(df.iterrows(), total=df.shape[0]):
         smiles = row["Smiles"]
         brics = remove_pattern(row["brics"])
@@ -50,9 +55,12 @@ def generate_compound():
             continue
         q_list = ast.literal_eval(brics)
         q = ".".join(q_list)
+        if valid_smiles(q):
+            valid += 1
         ans = smiles
         data.append({"instruction": instruction, "input": q, "output": ans})
         count += 1
+    print(valid, count)
     with open(f"{dir}/compound_all.json", "w") as json_file:
         json.dump(data, json_file, indent=2)
 
