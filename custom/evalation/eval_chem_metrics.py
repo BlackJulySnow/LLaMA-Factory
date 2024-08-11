@@ -30,9 +30,9 @@ def evaluate(input_file, morgan_r, verbose=False):
     bad_mols = 0
 
     with open(osp.join(input_file)) as f:
-        data = json.load(f)
-        for line in data:
+        for line in f.readlines():
             try:
+                line = json.loads(line)
                 gt_smi = line["label"]
                 ot_smi = line["predict"]
 
@@ -90,7 +90,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--input_file",
         type=str,
-        default="C:\\Users\\B1GGersnow\\LLaMa-Factory\\saves\\LLaMA3-8B\\lora\\eval_2024-08-09-07-19-31\\result_decompose.json",
+        default="custom/result/result_smiles.jsonl",
         help="path where test generations are saved",
     )
     parser.add_argument(

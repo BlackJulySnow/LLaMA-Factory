@@ -15,9 +15,9 @@ def evaluate(text_model, input_file, text_trunc_length):
     outputs = []
 
     with open(osp.join(input_file), encoding="utf8") as f:
-        data = json.load(f)
-        for item in data:
-            outputs.append((item["label"], item["predict"]))
+        for line in f.readlines():
+            line = json.loads(line)
+            outputs.append((line["label"], line["predict"]))
 
     text_tokenizer = AutoTokenizer.from_pretrained(text_model)
 
@@ -85,7 +85,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--input_file",
         type=str,
-        default="C:\\Users\\B1GGersnow\\LLaMa-Factory\\saves\\LLaMA3-8B\\lora\\eval_2024-08-09-07-19-31\\result_synthesize.json",
+        default="custom/result/result_smiles.jsonl",
         help="path where test generations are saved",
     )
     parser.add_argument(

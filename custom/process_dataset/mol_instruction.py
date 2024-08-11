@@ -12,7 +12,7 @@ def sf_encode(selfies):
 
 
 base_path = "custom/dataset/mol_instruction/"
-file_path = "retrosynthesis.json"
+file_path = "reagent_prediction.json"
 # 读取JSON文件
 with open(base_path + file_path, "r") as file:
     data = json.load(file)
@@ -33,7 +33,8 @@ for item in tqdm(data):
         continue
 
 
-with open(f"custom/dataset/mol_{file_path[:-5]}_train.json", "w") as f:
-    f.write(json.dumps(train_data, indent=2))
-with open(f"custom/dataset/mol_{file_path[:-5]}_test.json", "w") as f:
-    f.write(json.dumps(test_data, indent=2))
+# with open(f"custom/dataset/mol_{file_path[:-5]}_train.json", "w") as f:
+#     f.write(json.dumps(train_data, indent=2))
+# with open(f"custom/dataset/mol_{file_path[:-5]}_test.json", "w") as f:
+#     f.write(json.dumps(test_data, indent=2))
+print(len(train_data), len(test_data))
