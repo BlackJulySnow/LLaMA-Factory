@@ -14,7 +14,7 @@ template: llama3
 cutoff_len: 1024
 max_samples: 200000
 overwrite_cache: true
-preprocessing_num_workers: 32
+preprocessing_num_workers: 48
 
 ### output
 output_dir: saves/ChemDual/additional/2024-08-11

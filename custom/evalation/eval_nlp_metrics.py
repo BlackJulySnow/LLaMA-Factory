@@ -3,7 +3,7 @@ import json
 import os.path as osp
 from tqdm import tqdm
 import numpy as np
-
+import Levenshtein
 from transformers import AutoTokenizer
 
 from nltk.translate.bleu_score import corpus_bleu
@@ -23,6 +23,8 @@ def evaluate(text_model, input_file, text_trunc_length):
 
     bleu_scores = []
     meteor_scores = []
+    levenshtein_scores = []
+
 
     references = []
     hypotheses = []
@@ -43,6 +45,8 @@ def evaluate(text_model, input_file, text_trunc_length):
 
         mscore = meteor_score([gt_tokens], out_tokens)
         meteor_scores.append(mscore)
+        levenshtein_scores.append(Levenshtein.distance(gt, out))
+
 
     bleu2 = corpus_bleu(references, hypotheses, weights=(0.5, 0.5))
     bleu4 = corpus_bleu(references, hypotheses, weights=(0.25, 0.25, 0.25, 0.25))
@@ -71,6 +75,7 @@ def evaluate(text_model, input_file, text_trunc_length):
     print("rouge1:", rouge_1)
     print("rouge2:", rouge_2)
     print("rougeL:", rouge_l)
+    print("Levenshtein score:", np.mean(levenshtein_scores))
     return bleu2, bleu4, rouge_1, rouge_2, rouge_l, _meteor_score
 
 
@@ -79,13 +84,13 @@ if __name__ == "__main__":
     parser.add_argument(
         "--text_model",
         type=str,
-        default="C:\\Users\\B1GGersnow\\Desktop\\model\\DualChemV1",
+        default="C:\\Users\\B1GGersnow\\Desktop\\model\\DualChemV2",
         help="Desired language model tokenizer.",
     )
     parser.add_argument(
         "--input_file",
         type=str,
-        default="custom/result/result_smiles.jsonl",
+        default="custom/result/chemdfm_reaction_prediction.jsonl",
         help="path where test generations are saved",
     )
     parser.add_argument(

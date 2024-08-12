@@ -6,10 +6,11 @@ from tqdm.contrib import tzip
 from datasets import load_dataset
 from transformers.pipelines.pt_utils import KeyDataset
 
-model_id = "C:\\Users\\B1GGersnow\\Desktop\\model\\DualChemV1"
-data_files = "C:\\Users\\B1GGersnow\\Desktop\\dataset\\ChemDual\\smiles_test.json"
-result_file = "C:\\Users\\B1GGersnow\\Desktop\\dataset\\ChemDual\\result.json"
-batch_size = 2
+name = "chemdfm_reaction_prediction"
+model_id = "C:\\Users\\B1GGersnow\\Desktop\\model\\DualChemV2"
+data_files = f"custom/dataset/ChemDual/{name}.json"
+result_file = f"custom/result/{name}.jsonl"
+batch_size = 1
 
 pipeline = transformers.pipeline(
     "text-generation",
@@ -64,7 +65,8 @@ for out in tqdm(
         temperature=0.95,
         top_p=0.7,
         num_return_sequences=1,
-    )
+    ),
+    total=len(dataset),
 ):
     output.append(out[0]["generated_text"])
 lines = []
