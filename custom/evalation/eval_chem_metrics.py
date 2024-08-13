@@ -28,18 +28,19 @@ RDLogger.DisableLog("rdApp.*")
 def evaluate(input_file, morgan_r, verbose=False):
     outputs = []
     bad_mols = 0
-    total = 0
     correct = 0
+    total = 0
     with open(osp.join(input_file)) as f:
         for line in f.readlines():
             try:
                 line = json.loads(line)
                 gt_smi = line["label"]
                 ot_smi = line["predict"]
-
+                correct += len(set(gt_smi.split(".")) & set(ot_smi.split("."))) / max(
+                    len(set(gt_smi.split("."))), len(set(ot_smi.split(".")))
+                )
                 total += 1
-                if line["label"] == line["predict"]:
-                    correct += 1
+
                 gt_m = Chem.MolFromSmiles(gt_smi)
                 ot_m = Chem.MolFromSmiles(ot_smi)
 
@@ -52,7 +53,7 @@ def evaluate(input_file, morgan_r, verbose=False):
     if verbose:
         print("validity:", validity_score)
         print(
-            f"Accuracy: {correct} / {total} = {correct / total}",
+            f"Accuracy: {correct:.2f} / {total} = {(correct / total):.2f}",
         )
 
     MACCS_sims = []
@@ -97,7 +98,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--input_file",
         type=str,
-        default="custom/result/chemdfm_retro_synthesis.jsonl",
+        default="custom/result/chemdfm_reaction_prediction.jsonl",
         help="path where test generations are saved",
     )
     parser.add_argument(
