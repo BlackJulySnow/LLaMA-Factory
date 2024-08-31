@@ -1,6 +1,6 @@
 import json
 
-path = "custom/dataset/ChemDual/mol_retrosynthesis_test.json"
+path = "custom/dataset/ChemDual/mol_forward_reaction_prediction_train.json"
 
 with open(path) as f :
     data = json.load(f)
