@@ -98,7 +98,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--input_file",
         type=str,
-        default="custom/result/result_compound.jsonl",
+        default="custom/result/chemdfm_retro_synthesis.jsonl",
         help="path where test generations are saved",
     )
     parser.add_argument(

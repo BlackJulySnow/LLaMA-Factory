@@ -6,8 +6,8 @@ from tqdm.contrib import tzip
 from datasets import load_dataset
 from transformers.pipelines.pt_utils import KeyDataset
 
-name = "chemdfm_reaction_prediction"
-model_id = "C:\\Users\\B1GGersnow\\Desktop\\model\\DualChemV2"
+name = "chemdfm_retro_synthesis"
+model_id = "C:\\Users\\B1GGersnow\\Desktop\\model\\DualChemV3"
 data_files = f"custom/dataset/ChemDual/{name}.json"
 result_file = f"custom/result/{name}.jsonl"
 batch_size = 1
