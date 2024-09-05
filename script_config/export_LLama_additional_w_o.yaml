@@ -2,12 +2,12 @@
 
 ### model
 model_name_or_path: C:\Users\B1GGersnow\Desktop\model\Meta-Llama-3.1-8B-Instruct
-adapter_name_or_path: C:\Users\B1GGersnow\LLaMa-Factory\saves\ChemDual\train_2024-08-09\checkpoint-48000
+adapter_name_or_path: saves\ChemDual\additional\llama_w_o_retrosynthesis
 template: llama3
 finetuning_type: lora
 
 ### export
-export_dir: C:\Users\B1GGersnow\Desktop\model\DualChemV1
+export_dir: saves\ChemDual\additional\llama_w_o_retrosynthesis\model
 export_size: 5
 export_device: cpu
 export_legacy_format: false

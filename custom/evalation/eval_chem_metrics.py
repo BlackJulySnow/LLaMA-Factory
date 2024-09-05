@@ -87,8 +87,8 @@ def evaluate(input_file, morgan_r, verbose=False):
     rdk_sims_score = np.mean(RDK_sims)
     morgan_sims_score = np.mean(morgan_sims)
     if verbose:
-        print("Average MACCS Similarity:", maccs_sims_score)
         print("Average RDK Similarity:", rdk_sims_score)
+        print("Average MACCS Similarity:", maccs_sims_score)
         print("Average Morgan Similarity:", morgan_sims_score)
     return validity_score, maccs_sims_score, rdk_sims_score, morgan_sims_score
 
@@ -98,7 +98,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--input_file",
         type=str,
-        default="custom/result/chemdfm_retro_synthesis.jsonl",
+        default="custom/result/llama_w_o_retrosynthesis_mol_forward_reaction_prediction_test.jsonl",
         help="path where test generations are saved",
     )
     parser.add_argument(
