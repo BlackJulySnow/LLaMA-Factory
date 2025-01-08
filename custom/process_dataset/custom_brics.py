@@ -138,7 +138,7 @@ for gp in smartsGps:
         r2 = environs['L' + g2]
         g1 = re.sub('[a-z,A-Z]', '', g1)
         g2 = re.sub('[a-z,A-Z]', '', g2)
-        sma = '[$(%s):1]%s;!@[$(%s):2]>>[%s*]-[*:1].[%s*]-[*:2]' % (r1, bnd, r2, g1, g2)
+        sma = '[$(%s):1]%s;!@[$(%s):2]>>[*:1].[*:2]' % (r1, bnd, r2)
         gp[j] = sma
 reactions = tuple([[Reactions.ReactionFromSmarts(y) for y in x] for x in smartsGps])
 

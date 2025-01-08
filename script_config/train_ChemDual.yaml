@@ -8,7 +8,7 @@ finetuning_type: lora
 lora_target: all
 
 ### dataset
-dataset_dir: ChemDual
+dataset_dir: dataset
 dataset: compound_train,smiles_train
 template: llama3
 cutoff_len: 1024
@@ -17,7 +17,7 @@ overwrite_cache: true
 preprocessing_num_workers: 48
 
 ### output
-output_dir: saves/ChemDual/train_2024-08-09
+output_dir: saves/ChemDual/train_2024-09-05
 logging_steps: 10
 save_steps: 2000
 plot_loss: true

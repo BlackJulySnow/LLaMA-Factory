@@ -53,7 +53,7 @@ def evaluate(input_file, morgan_r, verbose=False):
     if verbose:
         print("validity:", validity_score)
         print(
-            f"Accuracy: {correct:.2f} / {total} = {(correct / total):.2f}",
+            f"Accuracy: {correct:.3f} / {total} = {(correct / total):.3f}",
         )
 
     MACCS_sims = []
@@ -98,7 +98,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--input_file",
         type=str,
-        default="custom/result/llama_w_o_retrosynthesis_mol_forward_reaction_prediction_test.jsonl",
+        default="custom/result/ChemDual_pretrained_ChemDual_fragment_test.jsonl",
         help="path where test generations are saved",
     )
     parser.add_argument(

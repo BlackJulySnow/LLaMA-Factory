@@ -19,7 +19,7 @@ def evaluate(text_model, input_file, text_trunc_length):
             line = json.loads(line)
             outputs.append((line["label"], line["predict"]))
 
-    text_tokenizer = AutoTokenizer.from_pretrained(text_model)
+    text_tokenizer = AutoTokenizer.from_pretrained(text_model, pad_token="<|eot_id|>")
 
     bleu_scores = []
     meteor_scores = []
@@ -90,7 +90,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--input_file",
         type=str,
-        default="custom/result/llama_w_o_forward_mol_retrosynthesis_test.jsonl",
+        default="custom/result/pretrained_ChemDual_fragment_test.jsonl",
         help="path where test generations are saved",
     )
     parser.add_argument(

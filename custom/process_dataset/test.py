@@ -1,17 +1,11 @@
-import sys
 from rdkit import Chem
-sys.path.append('custom')
-from evalation.valid_smiles import valid_smiles
-import selfies as sf
-def sf_encode(selfies):
-    try:
-        smiles = sf.decoder(selfies)
-        return smiles
-    except Exception:
-        return None
 
+# 含虚拟原子的 SMILES 表示
+smiles_with_virtual_atoms = "N1CCc2ccc(=O)n([9*])c2CC1"
 
-print(valid_smiles("[16*]c1ccc(C)cc1.[15*][C@@H]1CC=CC(=O)[C@@]2(C1=O)C(=O)N2N=C(C)C"))
-# print(sf.encoder("[1*]C([6*])=O"))
-# print(sf_encode("[C][C][Branch1][C][C][=O]"))
-# print(sf_encode("[1*]C([6*])=O"))
+# 转换为分子对象
+mol = Chem.MolFromSmiles(smiles_with_virtual_atoms)
+
+# 重新生成合法的 SMILES
+smiles_without_virtual_atoms = Chem.MolToSmiles(mol)
+print(smiles_without_virtual_atoms)
